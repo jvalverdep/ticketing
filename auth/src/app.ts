@@ -1,6 +1,7 @@
 import express from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
+import morgan from "morgan";
 
 import { errorHandler, NotFoundError } from "@jvptickets/common";
 import { currentUserRouter } from "./routes/current-user";
@@ -17,6 +18,7 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   })
 );
+app.use(morgan("dev"));
 
 app.use(currentUserRouter);
 app.use(signinRouter);
