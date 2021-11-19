@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "ts-node-dev src/index.ts",
     "test": "jest --watchAll --no-cache",
     "test:cov": "jest --coverage"
   },
@@ -33,14 +33,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@jvptickets/common": "^1.0.6",
+    "@jvptickets/common": "^1.0.8",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.12.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.5",
-    "nodemon": "^2.0.12"
+    "mongoose": "^6.0.5"
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.43",
@@ -55,6 +54,7 @@
     "supertest": "^6.1.6",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.2"
   }
 }
