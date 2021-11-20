@@ -33,13 +33,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@jvptickets/common": "^1.0.8",
+    "@jvptickets/common": "^1.0.11",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.12.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.5"
+    "mongoose": "^6.0.13"
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.43",
