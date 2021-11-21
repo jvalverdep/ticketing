@@ -4,7 +4,9 @@ import {
   UnauthorizedError,
 } from "@jvptickets/common";
 import express, { Request, Response } from "express";
+import { OrderCancelledPublisher } from "../events/publishers";
 import { Order, OrderStatus } from "../models/order";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -21,7 +23,13 @@ router.delete(
     order.status = OrderStatus.Cancelled;
     await order.save();
 
-    // TODO: publishing an event saying this was cancelled!
+    // Publish an event saying that an order was cancelled
+    new OrderCancelledPublisher(natsWrapper.client).publish({
+      id: order.id,
+      ticket: {
+        id: order.ticket.id,
+      },
+    });
 
     res.status(204).send(order);
   }

@@ -3,8 +3,9 @@ import app from "../../app";
 import { Ticket } from "../../models/ticket";
 import { Order, OrderStatus } from "../../models/order";
 import { JestHelpers } from "../../test/helpers";
+import { natsWrapper } from "../../nats-wrapper";
 
-it("marks an ", async () => {
+it("marks an order as cancelled", async () => {
   const cookie = JestHelpers.expressSessionMock();
 
   const ticket = Ticket.build({
@@ -32,4 +33,27 @@ it("marks an ", async () => {
   expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
 });
 
-it.todo("emits an order cancelled event");
+it("emits an order cancelled event", async () => {
+  const cookie = JestHelpers.expressSessionMock();
+
+  const ticket = Ticket.build({
+    title: "concert",
+    price: 20,
+  });
+  await ticket.save();
+
+  // make a request to create an order
+  const { body: order } = await request(app)
+    .post("/api/orders")
+    .set("Cookie", cookie)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  // make a request to cancel the order
+  await request(app)
+    .delete(`/api/orders/${order.id}`)
+    .set("Cookie", cookie)
+    .expect(204);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});

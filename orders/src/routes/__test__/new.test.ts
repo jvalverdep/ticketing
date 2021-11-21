@@ -67,4 +67,20 @@ it("reserves a ticket", async () => {
   expect(createdOrder?.ticket.id).toBeDefined();
 });
 
-it.todo("emits an order created event");
+it("emits an order created event", async () => {
+  const cookie = JestHelpers.expressSessionMock();
+
+  const ticket = Ticket.build({
+    title: "concert",
+    price: 20,
+  });
+  await ticket.save();
+
+  await request(app)
+    .post("/api/orders")
+    .set("Cookie", cookie)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
