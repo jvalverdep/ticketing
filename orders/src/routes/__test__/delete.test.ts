@@ -1,4 +1,5 @@
 import request from "supertest";
+import mongoose from "mongoose";
 import app from "../../app";
 import { Ticket } from "../../models/ticket";
 import { Order, OrderStatus } from "../../models/order";
@@ -9,6 +10,7 @@ it("marks an order as cancelled", async () => {
   const cookie = JestHelpers.expressSessionMock();
 
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -37,6 +39,7 @@ it("emits an order cancelled event", async () => {
   const cookie = JestHelpers.expressSessionMock();
 
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });

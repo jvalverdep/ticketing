@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 import request from "supertest";
 import app from "../../app";
-import { Order, OrderStatus } from "../../models/order";
 import { Ticket } from "../../models/ticket";
-import { natsWrapper } from "../../nats-wrapper";
 import { JestHelpers } from "../../test/helpers";
 
 it("fetches the order", async () => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -33,6 +32,7 @@ it("fetches the order", async () => {
 
 it("returns an error if an user tries to fetch ", async () => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
