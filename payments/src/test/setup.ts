@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 
 jest.mock("../nats-wrapper");
 
+process.env.STRIPE_KEY =
+  "sk_test_51K4SC7GieOYPdQpZa9rYkWo587OY3e1UTCCTyvKzZ1FraZqXdiRKYO8tV1uTs28QJm4BeWW84mVWyQumuhBxufNA00NUmH7mLt";
+
 let mongo: MongoMemoryServer;
 beforeAll(async () => {
   process.env.JWT_KEY = "asdasd";

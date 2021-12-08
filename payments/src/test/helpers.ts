@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
-export const signinMock = () => {
+const expressSessionMock = (id?: string) => {
   const payload = {
-    id: new mongoose.Types.ObjectId().toHexString(),
+    id: id || new mongoose.Types.ObjectId().toHexString(),
     email: "test@test.com",
   };
   const token = jwt.sign(payload, process.env.JWT_KEY!);
@@ -13,4 +13,8 @@ export const signinMock = () => {
   const base64 = Buffer.from(sessionJSON).toString("base64");
 
   return [`express:sess=${base64}`];
+};
+
+export const JestHelpers = {
+  expressSessionMock,
 };

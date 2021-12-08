@@ -40,7 +40,8 @@
     "express-validator": "^6.12.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.5",
-    "mongoose-update-if-current": "^1.4.0"
+    "mongoose-update-if-current": "^1.4.0",
+    "stripe": "^8.191.0"
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.43",
