@@ -2,7 +2,9 @@ name: tests-payments
 
 on:
   pull_request:
-    branches: [ main ]
+    paths:
+      - "payments/**"
+    branches: [main]
 
   workflow_dispatch:
 
