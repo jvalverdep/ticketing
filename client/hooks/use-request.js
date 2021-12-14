@@ -7,7 +7,6 @@ import { useState } from "react";
  * @param {string} requestParams.url
  * @param {string} requestParams.method
  * @param {Function} requestParams.onSuccess Function to run if succeded
- * @return {{ doRequest: (body: Object) => {}, errors }}
  */
 const useRequest = ({ url, method, onSuccess }) => {
   const [errors, setErrors] = useState(null);
@@ -17,7 +16,7 @@ const useRequest = ({ url, method, onSuccess }) => {
       setErrors(null);
       const response = await axios[method](url, body);
 
-      onSuccess && onSuccess();
+      onSuccess && onSuccess(response.data);
       return response.data;
     } catch (err) {
       setErrors(

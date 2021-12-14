@@ -11,7 +11,9 @@ const buildClient = ({ req }) => {
     });
   } else {
     // We're on the browser
-    return axios.create();
+    return axios.create({
+      baseURL: "/",
+    });
   }
 };
 
