@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 import { currentUser, errorHandler, NotFoundError } from "@jvptickets/common";
 import { createChargeRouter } from "./routes/new";
+import { getSecret } from "./routes/secret";
 
 const app = express();
 app.set("trust proxy", true);
@@ -19,6 +20,7 @@ app.use(morgan("dev"));
 
 app.use(currentUser);
 
+app.use(getSecret);
 app.use(createChargeRouter);
 
 app.all("*", async () => {

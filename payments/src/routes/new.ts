@@ -19,10 +19,10 @@ const router = express.Router();
 router.post(
   "/api/payments",
   requireAuth,
-  [body("token").notEmpty(), body("orderId").notEmpty()],
+  [body("paymentIntent").notEmpty(), body("orderId").notEmpty()],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { token, orderId } = req.body;
+    const { paymentIntent, orderId } = req.body;
 
     const order = await Order.findById(orderId);
 
@@ -33,15 +33,9 @@ router.post(
     if (order.status === OrderStatus.Cancelled)
       throw new BadRequestError("Cannot pay for an cancelled order");
 
-    const charge = await stripe.charges.create({
-      currency: "usd",
-      amount: order.price * 100,
-      source: token,
-    });
-
     const payment = Payment.build({
       orderId,
-      stripeId: charge.id,
+      stripeId: paymentIntent,
     });
     await payment.save();
     new PaymentCreatedPublisher(natsWrapper.client).publish({
