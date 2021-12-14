@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "test": "jest --watchAll --no-cache",
+    "test:ci": "jest",
     "test:cov": "jest --coverage"
   },
   "jest": {
