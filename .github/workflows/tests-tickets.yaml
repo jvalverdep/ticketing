@@ -2,7 +2,9 @@ name: tests-tickets
 
 on:
   pull_request:
-    branches: [ main ]
+    paths:
+      - "tickets/**"
+    branches: [main]
 
   workflow_dispatch:
 
