@@ -12,7 +12,7 @@ const buildClient = ({ req }) => {
   } else {
     // We're on the browser
     return axios.create({
-      baseURL: "/",
+      baseURL: "http://www.ticketing-app-prod.online",
     });
   }
 };
