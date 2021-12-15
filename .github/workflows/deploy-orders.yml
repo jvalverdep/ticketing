@@ -22,5 +22,7 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Save DigitalOcean kubeconfig
-        run: doctl kubernetes cluster kubeconfig save k8s-tickets-nyc1
+        run: doctl kubernetes cluster kubeconfig save $CLUSTER_NAME
+        env:
+          CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
       - run: kubectl rollout restart deployment orders-depl
