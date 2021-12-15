@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ticketing-client
+      app: client
   template:
     metadata:
       labels:
-        app: ticketing-client
+        app: client
     spec:
       containers:
         - name: client
-          image: jvalverdepa/ticketing-client:latest
+          image: jvalverdepa/client:latest
 ---
 apiVersion: v1
 kind: Service
@@ -22,7 +22,7 @@ metadata:
   name: client-srv
 spec:
   selector:
-    app: ticketing-client
+    app: client
   ports:
     - name: client
       protocol: TCP

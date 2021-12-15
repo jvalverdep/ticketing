@@ -24,7 +24,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: jvalverdepa/ticketing-client
+    - image: jvalverdepa/client
       context: client
       docker:
         dockerfile: Dockerfile
